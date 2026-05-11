@@ -19,22 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tangyayan.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="FeMouth的个人博客">
-<meta property="og:url" content="https://tangyayan.github.io/index.html">
+    <meta name="description" content="编码目标：\(\min{D(x,y)}\)，且\(Hy&#x3D;m(\text{mod}\ 2)\)，其中m为隐藏信息 编码\(x&#x3D;1001101001101010，m &#x3D; 10110111\)，小矩阵为： \[ \hat{H}&#x3D;\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} \] x的长度为16，m的长度为8，小矩阵为2*2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stc编码">
+<meta property="og:url" content="https://tangyayan.github.io/2026/05/11/stc/index.html">
 <meta property="og:site_name" content="FeMouth的个人博客">
+<meta property="og:description" content="编码目标：\(\min{D(x,y)}\)，且\(Hy&#x3D;m(\text{mod}\ 2)\)，其中m为隐藏信息 编码\(x&#x3D;1001101001101010，m &#x3D; 10110111\)，小矩阵为： \[ \hat{H}&#x3D;\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} \] x的长度为16，m的长度为8，小矩阵为2*2">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tangyayan.github.io/2026/05/11/stc/1775291016049.png">
+<meta property="article:published_time" content="2026-05-11T03:50:03.000Z">
+<meta property="article:modified_time" content="2026-05-11T09:32:32.618Z">
 <meta property="article:author" content="FeMouth">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tangyayan.github.io/2026/05/11/stc/1775291016049.png">
 
 
-<link rel="canonical" href="https://tangyayan.github.io/">
+<link rel="canonical" href="https://tangyayan.github.io/2026/05/11/stc/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://tangyayan.github.io/2026/05/11/stc/","path":"2026/05/11/stc/","title":"stc编码"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>FeMouth的个人博客</title>
+<title>stc编码 | FeMouth的个人博客</title>
   
 
 
@@ -90,7 +96,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">FeMouth的个人博客</h1>
+      <p class="site-title">FeMouth的个人博客</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -116,7 +122,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -129,6 +135,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%AD%90%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">格子图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">2.1.</span> <span class="nav-text">过程说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">附录</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,16 +169,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://tangyayan.github.io/2026/05/11/stc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -185,13 +193,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | FeMouth的个人博客">
+      <meta itemprop="name" content="stc编码 | FeMouth的个人博客">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/11/stc/" class="post-title-link" itemprop="url">stc编码</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          stc编码
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -223,8 +231,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <p>编码目标：<span class="math inline">\(\min{D(x,y)}\)</span>，且<span
+    <div class="post-body" itemprop="articleBody"><p>编码目标：<span class="math inline">\(\min{D(x,y)}\)</span>，且<span
 class="math inline">\(Hy=m(\text{mod}\ 2)\)</span>，其中m为隐藏信息</p>
 <p>编码<span class="math inline">\(x=1001101001101010，m =
 10110111\)</span>，小矩阵为：</p>
@@ -271,7 +278,6 @@ class="math inline">\(\{00,01,10,11\}\)</span></p>
 <p>计算使用cpp实现算法，关键代码及解析如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> h(<span class="built_in">int</span> index,<span class="built_in">int</span> k)//h，当最后一个子块时会有变化</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">int</span> tt[<span class="number">3</span>]=&#123;<span class="number">3</span>,<span class="number">2</span>&#125;;</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="built_in">len</span>/<span class="number">2</span>)<span class="keyword">return</span> tt[index]&amp;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tt[index];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> k=<span class="number">1</span>;k&lt;=<span class="built_in">len</span>/<span class="number">2</span>;k++)</span><br><span class="line">&#123;</span><br><span class="line">	printf(<span class="string">&quot;=====\n&quot;</span>);//每个子块内部的计算</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> t=<span class="number">0</span>;t&lt;<span class="number">2</span>;t++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">int</span> now=(x&gt;&gt;(<span class="built_in">len</span>-i-<span class="number">1</span>))&amp;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(auto llp : ll)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">int</span> cgn=llp xor h(t,k)*(<span class="number">1</span>-now),ucgn=llp xor h(t,k)*now;</span><br><span class="line">			//cgn表示改变当前比特的下一步状态，ucgn表示不改变的状态</span><br><span class="line">			printf(<span class="string">&quot;%d: %d to %d %d\n&quot;</span>,i+<span class="number">1</span>,llp,cgn,f[i][llp]+<span class="number">1</span>);</span><br><span class="line">			printf(<span class="string">&quot;%d: %d to %d %d\n&quot;</span>,i+<span class="number">1</span>,llp,ucgn,f[i][llp]);</span><br><span class="line">			<span class="keyword">if</span>(f[i+<span class="number">1</span>][cgn]&gt;f[i][llp]+<span class="number">1</span>)&#123;</span><br><span class="line">				f[i+<span class="number">1</span>][cgn]=f[i][llp]+<span class="number">1</span>;</span><br><span class="line">				g[i+<span class="number">1</span>][cgn][<span class="number">0</span>]=llp;g[i+<span class="number">1</span>][cgn][<span class="number">1</span>]=<span class="number">1</span>-now;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(f[i+<span class="number">1</span>][ucgn]&gt;f[i][llp])&#123;</span><br><span class="line">				f[i+<span class="number">1</span>][ucgn]=f[i][llp];</span><br><span class="line">				g[i+<span class="number">1</span>][ucgn][<span class="number">0</span>]=llp;g[i+<span class="number">1</span>][ucgn][<span class="number">1</span>]=now;</span><br><span class="line">			&#125;</span><br><span class="line">			//g[][][<span class="number">0</span>]用于追踪上一个状态，g[][][<span class="number">1</span>]用于表示当前bit的y</span><br><span class="line">			nl.insert(cgn);nl.insert(ucgn);</span><br><span class="line">		&#125;</span><br><span class="line">		ll=nl;</span><br><span class="line">		nl.clear();</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(<span class="string">&quot;p_%d:\n&quot;</span>,k);</span><br><span class="line">	<span class="built_in">int</span> nowm=(m&gt;&gt;(<span class="built_in">len</span>/<span class="number">2</span>-k)) &amp; <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">int</span> temp[<span class="number">5</span>]=&#123;<span class="number">100</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(auto llp:ll)//跳到下一个子块，状态需要右移，且要保证最低位为m的第k位</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(llp%<span class="number">2</span>==nowm)//最低位，不会受后面bit影响</span><br><span class="line">		&#123;</span><br><span class="line">			temp[llp&gt;&gt;<span class="number">1</span>]=f[i][llp];nl.insert(llp&gt;&gt;<span class="number">1</span>);</span><br><span class="line">			printf(<span class="string">&quot;%d to %d %d\n&quot;</span>,llp,llp&gt;&gt;<span class="number">1</span>,f[i][llp]);</span><br><span class="line">			p[k][llp&gt;&gt;<span class="number">1</span>]=llp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ll=nl;nl.clear();</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)f[i][j]=temp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> nn=*ll.begin(),ans=<span class="number">0</span>;//回溯到答案，ans即为所求y</span><br><span class="line">i=<span class="built_in">len</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> k=<span class="built_in">len</span>/<span class="number">2</span>;k&gt;=<span class="number">1</span>;k--)</span><br><span class="line">&#123;</span><br><span class="line">	nn=p[k][nn];</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> t=<span class="number">0</span>;t&lt;<span class="number">2</span>;t++)</span><br><span class="line">	&#123;</span><br><span class="line">		ans+=(g[i][nn][<span class="number">1</span>]&lt;&lt;(<span class="built_in">len</span>-i));</span><br><span class="line">		nn=g[i][nn][<span class="number">0</span>];</span><br><span class="line">		i--;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -279,102 +285,22 @@ class="math inline">\(\{00,01,10,11\}\)</span></p>
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/11/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-angle-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://tangyayan.github.io/2026/05/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="FeMouth">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FeMouth的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | FeMouth的个人博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-05-11 09:51:12" itemprop="dateCreated datePublished" datetime="2026-05-11T09:51:12+08:00">2026-05-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
