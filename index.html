@@ -78,6 +78,7 @@
   <main class="main">
     <div class="column">
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -190,7 +191,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/11/stc/" class="post-title-link" itemprop="url">stc编码</a>
+          <a href="/2026/05/11/stc/" class="post-title-link" itemprop="url">STC编码</a>
         </h2>
 
         <div class="post-meta-container">
@@ -202,7 +203,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-05-11 11:50:03 / 修改时间：17:32:32" itemprop="dateCreated datePublished" datetime="2026-05-11T11:50:03+08:00">2026-05-11</time>
+      <time title="创建时间：2026-05-11 11:50:03 / 修改时间：17:51:58" itemprop="dateCreated datePublished" datetime="2026-05-11T11:50:03+08:00">2026-05-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -224,53 +225,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>编码目标：<span class="math inline">\(\min{D(x,y)}\)</span>，且<span
-class="math inline">\(Hy=m(\text{mod}\ 2)\)</span>，其中m为隐藏信息</p>
-<p>编码<span class="math inline">\(x=1001101001101010，m =
-10110111\)</span>，小矩阵为：</p>
-<p><span class="math display">\[
-\hat{H}=\begin{bmatrix}
-1 &amp; 0 \\
-1 &amp; 1
-\end{bmatrix}
-\]</span></p>
-<p>x的长度为16，m的长度为8，小矩阵为2*2</p>
-<h3 id="参数配置">参数配置</h3>
-<p>校验矩阵由小矩阵摆上一个矩阵的右侧，并下移一行组成，大小为<span
-class="math inline">\(8*16\)</span>（由m的长度和x的长度决定），对于二元嵌入，格子图需要包含8个子块，代表对子矩阵<span
-class="math inline">\(\hat{H}\)</span>的处理；每个子块需要由<span
-class="math inline">\(2^2=4\)</span>行，<span
-class="math inline">\(2+1=3\)</span>列，因此局部校验子编号为<span
-class="math inline">\(\{00,01,10,11\}\)</span></p>
-<h3 id="格子图">格子图</h3>
-<p>最左列表示状态，其中高位在左；每个节点的值表示修改位数；最上一行表示x，最下一行表示y；由箭头表示的线表示不同嵌入方法，绿线表示删除的路径，红线表示最优路径。</p>
-<img src="/2026/05/11/stc/1775291016049.png" class="" width="1775291016049">
-<h4 id="过程说明">过程说明</h4>
-<p>对于题目的小矩阵，状态为11和10（从下往上读，因为高位在左）</p>
-<ul>
-<li>p0到1：初始状态为00，可以选择是否修改x的第一位bit，状态根据小矩阵的第一列转移，如果修改，则状态改为00+11*0=00，且修改位数；不修改，则状态改为00+11*1=11，且修改位数保持为0</li>
-<li>1到2：根据小矩阵的第二列转移，有两个状态，分别考虑修改第2位和不修改第二位的状态</li>
-<li>2到p1：此时到第二个子块，需要保证最低位为m的第一位，因此选择1和3状态，由于校验矩阵构造时小矩阵下移一位，因此状态右移一位变为1和2。</li>
-<li>以此类推…，当p7转移时，校验矩阵的小矩阵变为以下矩阵，因此这时不会再出现2和3状态。</li>
-</ul>
-<p><span class="math display">\[
-\hat{H}=\begin{bmatrix}
-1 &amp; 0 \\
-0 &amp; 0
-\end{bmatrix}
-\]</span></p>
-<ul>
-<li>到达p8时结束状态转移，可以根据该格子图反推得到y，与p8连接的是16的1状态，然后是15的1状态，两个状态的修改位数不变，说明该位没有变化，因此y的第16位与x的第16位相同，以此类推。</li>
-</ul>
-<h3 id="结果">结果</h3>
-<blockquote>
-<p>y为<strong>1011,1000,0010,0010</strong>，其中修改位为4位。</p>
-</blockquote>
-<p>由图可以看到有多种答案（在第10列的3以及第15列的4可以通过多种方式到达），这里显示其中一种</p>
-<h3 id="附录">附录</h3>
-<p>计算使用cpp实现算法，关键代码及解析如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> h(<span class="built_in">int</span> index,<span class="built_in">int</span> k)//h，当最后一个子块时会有变化</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">int</span> tt[<span class="number">3</span>]=&#123;<span class="number">3</span>,<span class="number">2</span>&#125;;</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="built_in">len</span>/<span class="number">2</span>)<span class="keyword">return</span> tt[index]&amp;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tt[index];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> k=<span class="number">1</span>;k&lt;=<span class="built_in">len</span>/<span class="number">2</span>;k++)</span><br><span class="line">&#123;</span><br><span class="line">	printf(<span class="string">&quot;=====\n&quot;</span>);//每个子块内部的计算</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> t=<span class="number">0</span>;t&lt;<span class="number">2</span>;t++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">int</span> now=(x&gt;&gt;(<span class="built_in">len</span>-i-<span class="number">1</span>))&amp;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(auto llp : ll)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">int</span> cgn=llp xor h(t,k)*(<span class="number">1</span>-now),ucgn=llp xor h(t,k)*now;</span><br><span class="line">			//cgn表示改变当前比特的下一步状态，ucgn表示不改变的状态</span><br><span class="line">			printf(<span class="string">&quot;%d: %d to %d %d\n&quot;</span>,i+<span class="number">1</span>,llp,cgn,f[i][llp]+<span class="number">1</span>);</span><br><span class="line">			printf(<span class="string">&quot;%d: %d to %d %d\n&quot;</span>,i+<span class="number">1</span>,llp,ucgn,f[i][llp]);</span><br><span class="line">			<span class="keyword">if</span>(f[i+<span class="number">1</span>][cgn]&gt;f[i][llp]+<span class="number">1</span>)&#123;</span><br><span class="line">				f[i+<span class="number">1</span>][cgn]=f[i][llp]+<span class="number">1</span>;</span><br><span class="line">				g[i+<span class="number">1</span>][cgn][<span class="number">0</span>]=llp;g[i+<span class="number">1</span>][cgn][<span class="number">1</span>]=<span class="number">1</span>-now;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(f[i+<span class="number">1</span>][ucgn]&gt;f[i][llp])&#123;</span><br><span class="line">				f[i+<span class="number">1</span>][ucgn]=f[i][llp];</span><br><span class="line">				g[i+<span class="number">1</span>][ucgn][<span class="number">0</span>]=llp;g[i+<span class="number">1</span>][ucgn][<span class="number">1</span>]=now;</span><br><span class="line">			&#125;</span><br><span class="line">			//g[][][<span class="number">0</span>]用于追踪上一个状态，g[][][<span class="number">1</span>]用于表示当前bit的y</span><br><span class="line">			nl.insert(cgn);nl.insert(ucgn);</span><br><span class="line">		&#125;</span><br><span class="line">		ll=nl;</span><br><span class="line">		nl.clear();</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(<span class="string">&quot;p_%d:\n&quot;</span>,k);</span><br><span class="line">	<span class="built_in">int</span> nowm=(m&gt;&gt;(<span class="built_in">len</span>/<span class="number">2</span>-k)) &amp; <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">int</span> temp[<span class="number">5</span>]=&#123;<span class="number">100</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(auto llp:ll)//跳到下一个子块，状态需要右移，且要保证最低位为m的第k位</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(llp%<span class="number">2</span>==nowm)//最低位，不会受后面bit影响</span><br><span class="line">		&#123;</span><br><span class="line">			temp[llp&gt;&gt;<span class="number">1</span>]=f[i][llp];nl.insert(llp&gt;&gt;<span class="number">1</span>);</span><br><span class="line">			printf(<span class="string">&quot;%d to %d %d\n&quot;</span>,llp,llp&gt;&gt;<span class="number">1</span>,f[i][llp]);</span><br><span class="line">			p[k][llp&gt;&gt;<span class="number">1</span>]=llp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ll=nl;nl.clear();</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)f[i][j]=temp[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> nn=*ll.begin(),ans=<span class="number">0</span>;//回溯到答案，ans即为所求y</span><br><span class="line">i=<span class="built_in">len</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> k=<span class="built_in">len</span>/<span class="number">2</span>;k&gt;=<span class="number">1</span>;k--)</span><br><span class="line">&#123;</span><br><span class="line">	nn=p[k][nn];</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">int</span> t=<span class="number">0</span>;t&lt;<span class="number">2</span>;t++)</span><br><span class="line">	&#123;</span><br><span class="line">		ans+=(g[i][nn][<span class="number">1</span>]&lt;&lt;(<span class="built_in">len</span>-i));</span><br><span class="line">		nn=g[i][nn][<span class="number">0</span>];</span><br><span class="line">		i--;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+          <p>在信息隐写中可以通过STC编码来最小化失真函数，该方法用了动态规划的思想，可以找到最小修改位并能通过钥匙矩阵还原出隐写信息，本文用C++实现了一个简单的STC编码代码。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/05/11/stc/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -324,8 +287,9 @@ class="math inline">\(\{00,01,10,11\}\)</span></p>
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2026-05-11 09:51:12" itemprop="dateCreated datePublished" datetime="2026-05-11T09:51:12+08:00">2026-05-11</time>
+      <time title="创建时间：2026-05-11 09:51:12 / 修改时间：17:40:58" itemprop="dateCreated datePublished" datetime="2026-05-11T09:51:12+08:00">2026-05-11</time>
     </span>
 
   
@@ -345,23 +309,14 @@ answer in <a
 target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
 you can ask me on <a
 target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/05/11/hello-world/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -394,8 +349,10 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     </span>
     <span class="author" itemprop="copyrightHolder">FeMouth</span>
   </div>
+
+<!--
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
+  </div> -->
 
     </div>
   </footer>
