@@ -3,6 +3,7 @@ title: STC编码
 date: 2026-05-11 11:50:03
 categories: 多媒体安全
 mathjax: true
+header_img: /images/post1-bg.jpg
 ---
 在信息隐写中可以通过STC编码来最小化失真函数，该方法用了动态规划的思想，可以找到最小修改位并能通过钥匙矩阵还原出隐写信息，本文用C++实现了一个简单的STC编码代码。
 

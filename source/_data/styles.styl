@@ -1,0 +1,160 @@
+// ============================================================
+// Hux-style Intro Header for NexT Theme (Gemini scheme)
+// 放置路径: source/_data/styles.styl
+// ============================================================
+
+// ---- 变量 ----
+$intro-height        = 45vh          // 占屏幕高度
+$intro-min-height    = 450px
+$intro-overlay-color = rgba(0, 0, 0, 0.5)  // 蒙层透明度
+$intro-text-color    = #ffffff
+
+// ---- 隐藏 NexT 原生 header（用 intro-header 替换） ----
+// 若只想在首页替换，可加 .index 前缀
+.header-inner,
+#header .site-brand-wrapper {
+  // 保持原来的 header 结构，intro-header 插在其后
+  // 如需彻底隐藏原生 header，取消下面注释：
+  // display: none !important;
+}
+
+// ---- Intro Header 主体 ----
+.intro-header {
+  position: relative;
+  width: 100%;
+  height: $intro-height;
+  min-height: $intro-min-height;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; // 视差效果，移动端会自动降级
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  // 移动端去掉 fixed attachment（iOS 性能问题）
+  @media (max-width: 767px) {
+    background-attachment: scroll;
+    height: 70vh;
+    min-height: 350px;
+  }
+}
+
+// ---- 深色蒙层 ----
+.intro-header-mask {
+  position: absolute;
+  inset: 0;
+  background: $intro-overlay-color;
+  z-index: 1;
+}
+
+// ---- 居中文字容器 ----
+.intro-header-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  padding: 0 20px;
+  color: $intro-text-color;
+}
+
+.intro-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+// ---- 主标题 ----
+.intro-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: $intro-text-color !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  margin: 0 0 0.3em;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+
+  @media (max-width: 767px) {
+    font-size: 2.2rem;
+  }
+}
+
+// ---- 分割线 ----
+.intro-divider {
+  width: 80px;
+  border-top: 3px solid rgba(255, 255, 255, 0.6);
+  margin: 0.8em auto;
+}
+
+// ---- 副标题 ----
+.intro-subtitle {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.04em;
+  margin-top: 0.5em;
+
+  @media (max-width: 767px) {
+    font-size: 1rem;
+  }
+}
+
+// ---- 标签 ----
+.intro-tags {
+  margin-top: 1.2em;
+
+  .intro-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    margin: 4px;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+  }
+}
+
+// ---- 文章元信息（日期、作者） ----
+.intro-meta {
+  margin-top: 1.2em;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.03em;
+
+  span {
+    margin: 0 10px;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+
+// ---- 向下滚动箭头 ----
+
+
+@keyframes intro-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+// ---- 让页面主体紧接 intro-header，不留多余间距 ----
+.main-inner {
+  margin-top: 0 !important;
+}
+
+// ---- Gemini scheme 下去掉 header 区域与 intro-header 之间的空白 ----
+.column.main {
+  padding-top: 0 !important;
+}

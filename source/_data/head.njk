@@ -1,0 +1,51 @@
+{# ============================================================
+   Hux-style Intro Header for NexT Theme (Gemini scheme)
+   放置路径: source/_data/header.njk
+   ============================================================ #}
+
+{%- if page.type === 'index' or page.path === 'index.html' or page.path === '' %}
+  {%- set intro_bg = theme.intro_header.index_bg or '/images/intro-bg.jpg' %}
+  {%- set intro_title = config.title %}
+  {%- set intro_subtitle = config.subtitle or theme.intro_header.subtitle or '' %}
+{%- elif page.layout === 'post' %}
+  {%- set intro_bg = page.header_img or theme.intro_header.default_bg or '/images/post-bg.jpg' %}
+  {%- set intro_title = page.title %}
+  {%- set intro_subtitle = page.subtitle or '' %}
+{%- elif page.layout === 'page' %}
+  {%- set intro_bg = page.header_img or theme.intro_header.default_bg or '/images/page-bg.jpg' %}
+  {%- set intro_title = page.title %}
+  {%- set intro_subtitle = page.subtitle or '' %}
+{%- else %}
+  {%- set intro_bg = theme.intro_header.default_bg or '/images/intro-bg.jpg' %}
+  {%- set intro_title = config.title %}
+  {%- set intro_subtitle = '' %}
+{%- endif %}
+
+<div class="intro-header" style="background-image: url('{{ intro_bg }}');">
+  <div class="intro-header-mask"></div>
+  <div class="intro-header-content">
+    <div class="intro-header-inner">
+      <h1 class="intro-title">{{ intro_title }}</h1>
+      {%- if intro_subtitle %}
+        <hr class="intro-divider">
+        <span class="intro-subtitle">{{ intro_subtitle }}</span>
+      {%- endif %}
+      {%- if page.tags and page.tags.length %}
+        <div class="intro-tags">
+          {%- for tag in page.tags.toArray() %}
+            <span class="intro-tag">#{{ tag.name }}</span>
+          {%- endfor %}
+        </div>
+      {%- endif %}
+      {%- if page.date and page.layout === 'post' %}
+        <div class="intro-meta">
+          <span><i class="fa fa-calendar"></i> {{ page.date.format(config.date_format) }}</span>
+          {%- if page.author or config.author %}
+            <span><i class="fa fa-user"></i> {{ page.author or config.author }}</span>
+          {%- endif %}
+        </div>
+      {%- endif %}
+    </div>
+  </div>
+
+</div>
