@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: FeMouth的个人博客
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: FeMouth
+language: zh-CN
 timezone: ''
 
 # URL
@@ -40,7 +40,10 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+marked: 
+	prependRoot: true 
+	postAsset: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -106,3 +109,8 @@ deploy:
   repo: https://github.com/tangyayan/tangyayan.github.io
   branch: gh-pages
   message: Site updated {{ now('YYYY-MM-DD HH:mm:ss') }}
+
+# config of hexo-renderer-pandoc
+pandoc:
+  args:
+    - --mathjax
