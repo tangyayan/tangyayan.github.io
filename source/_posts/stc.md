@@ -1,5 +1,6 @@
 ---
 title: STC编码
+subtitle: c++实现的stc编码器
 date: 2026-05-11 11:50:03
 categories: 多媒体安全
 mathjax: true

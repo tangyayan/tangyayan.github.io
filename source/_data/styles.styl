@@ -27,7 +27,7 @@ $intro-text-color    = #ffffff
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed; // 视差效果，移动端会自动降级
+  background-attachment: scroll; // 视差效果，移动端会自动降级
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,13 +78,6 @@ $intro-text-color    = #ffffff
   @media (max-width: 767px) {
     font-size: 2.2rem;
   }
-}
-
-// ---- 分割线 ----
-.intro-divider {
-  width: 80px;
-  border-top: 3px solid rgba(255, 255, 255, 0.6);
-  margin: 0.8em auto;
 }
 
 // ---- 副标题 ----
