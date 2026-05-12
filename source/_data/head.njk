@@ -2,12 +2,12 @@
    Hux-style Intro Header for NexT Theme (Gemini scheme)
    放置路径: source/_data/header.njk
    ============================================================ #}
-<nav class="intro-nav">
-  {%- for name, path in theme.menu %}
-    <a class="intro-nav-item" href="{{ url_for(path) }}">
-      {{ __('menu.' + name) or name }}
-    </a>
-  {%- endfor %}
+<nav class="intro-nav"> 
+  {%- for name, path in theme.menu %} 
+    {%- set itemURL = path.split('||')[0].trim() %}
+    {%- set menuText = __('menu.' + name) | replace('menu.', '') or name %}
+    {{- next_url(itemURL, '<span class="intro-nav-item">' + menuText + '</span>', {}) -}}
+  {%- endfor %} 
 </nav>
 
 {%- if page.type === 'index' or page.path === 'index.html' or page.path === '' %}
