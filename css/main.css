@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #052dff;
+    background: #c9d938;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2717,10 +2717,23 @@ header.header {
   margin-bottom: 0;
 }
 @media (max-width: 767px) {
+  .column.main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0 !important;
+  }
+  .header-inner {
+    position: relative !important;
+    order: 1;
+  }
   .intro-header {
-    background-attachment: scroll;
-    height: 70vh;
-    min-height: 350px;
+    order: 2;
+  }
+  .main-inner {
+    order: 3;
+  }
+  .main {
+    padding-top: 0 !important;
   }
 }
 .intro-header-mask {
@@ -2754,11 +2767,6 @@ header.header {
   .intro-title {
     font-size: 2.2rem;
   }
-}
-.intro-divider {
-  width: 80px;
-  border-top: 3px solid rgba(255,255,255,0.6);
-  margin: 0.8em auto;
 }
 .intro-subtitle {
   display: block;
