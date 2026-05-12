@@ -2,6 +2,13 @@
    Hux-style Intro Header for NexT Theme (Gemini scheme)
    放置路径: source/_data/header.njk
    ============================================================ #}
+<nav class="intro-nav">
+  {%- for name, path in theme.menu %}
+    <a class="intro-nav-item" href="{{ url_for(path) }}">
+      {{ __('menu.' + name) or name }}
+    </a>
+  {%- endfor %}
+</nav>
 
 {%- if page.type === 'index' or page.path === 'index.html' or page.path === '' %}
   {%- set intro_bg = theme.intro_header.index_bg or '/images/intro-bg.jpg' %}
@@ -42,6 +49,12 @@
           <span><i class="fa fa-calendar"></i> {{ page.date.format(config.date_format) }}</span>
           {%- if page.author or config.author %}
             <span><i class="fa fa-user"></i> {{ page.author or config.author }}</span>
+          {%- endif %}
+        </div>#}
+        {#<div class="post-meta-container">
+          {{ partial('_partials/post/post-meta.njk', {post: page}) }}
+          {%- if post.description and (not theme.excerpt_description or not is_index) %}
+            <div class="post-description">{{ post.description }}</div>
           {%- endif %}
         </div>#}
       {%- endif %}

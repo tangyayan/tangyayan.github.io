@@ -33,13 +33,16 @@ $intro-text-color    = #ffffff
   justify-content: center;
   overflow: hidden;
   margin-bottom: 0;
+}
+// ---- 移动端 ----
++mobile() {
 
-  // 移动端去掉 fixed attachment（iOS 性能问题）
-  @media (max-width: 767px) {
+  .intro-header {
     background-attachment: scroll;
     height: 70vh;
     min-height: 350px;
   }
+
 }
 
 // ---- 深色蒙层 ----
@@ -75,7 +78,7 @@ $intro-text-color    = #ffffff
   line-height: 1.2;
   letter-spacing: 0.02em;
 
-  @media (max-width: 767px) {
+  +mobile() {
     font-size: 2.2rem;
   }
 }
@@ -90,7 +93,7 @@ $intro-text-color    = #ffffff
   letter-spacing: 0.04em;
   margin-top: 0.5em;
 
-  @media (max-width: 767px) {
+  +mobile() {
     font-size: 1rem;
   }
 }
@@ -150,4 +153,40 @@ $intro-text-color    = #ffffff
 // ---- Gemini scheme 下去掉 header 区域与 intro-header 之间的空白 ----
 .column.main {
   padding-top: 0 !important;
+}
+
+.intro-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: none;  // ← 默认隐藏
+  justify-content: center;
+  gap: 2em;
+  padding: 1em 2em;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+
+  +mobile() {
+    display: flex;  // ← 移动端才显示
+  }
+
+  .intro-nav-item {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.header {
+  +mobile() {
+    display: none !important;
+  }
 }
