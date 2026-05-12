@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #2f96c6;
+    background: #ff2503;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2819,7 +2819,7 @@ header.header {
   background: rgba(0,0,0,0.2);
   backdrop-filter: blur(4px);
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .intro-nav {
     display: flex;
   }
@@ -2835,7 +2835,7 @@ header.header {
 .intro-nav .intro-nav-item:hover {
   color: #fff;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .header {
     display: none !important;
   }
