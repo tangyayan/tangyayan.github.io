@@ -3,10 +3,9 @@
    放置路径: source/_data/header.njk
    ============================================================ #}
 <nav class="intro-nav"> 
-  {%- for name, path in theme.menu %} 
-    {%- set itemURL = path.split('||')[0].trim() %}
-    {%- set menuText = __('menu.' + name) | replace('menu.', '') or name %}
-    {{- next_url(itemURL, '<span class="intro-nav-item">' + menuText + '</span>', {}) -}}
+  {%- for node in theme.main_menu %}
+    {%- set menuText = __('menu.' + node.name) | replace('menu.', '') or node.name %}
+    {{- next_url(node.path, '<span class="intro-nav-item">' + menuText + '</span>', {}) -}}
   {%- endfor %} 
 </nav>
 
