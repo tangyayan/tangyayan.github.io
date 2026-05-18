@@ -1,5 +1,8 @@
 ---
 title: {{ title }}
+subtitle:
 date: {{ date }}
-tags:
+categories:
+mathjax:
+header_img:
 ---
